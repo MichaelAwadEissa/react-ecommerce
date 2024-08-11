@@ -1,0 +1,124 @@
+//routes
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Register from '../pages/register/register';
+import NotfoundPage from '../pages/notfound/notfound';
+import NavBar from '../components/navbar/navbar';
+import ProdDetalies from '../components/Products/productDetailes';
+import Homepage from '../pages/home/home';
+import LogIn from '../pages/log in/logIn';
+import Cart from '../components/ShoppingCart/shopping Cart';
+import { useSelector } from 'react-redux';
+
+export default function AppRoute() {
+  const checkRedux =useSelector((state)=>(state.myLang.lang))
+  const MyTheme = useSelector((state) => state.myTheme.theme);
+
+
+  return (
+    <BrowserRouter>
+      <div className={MyTheme === "light" ? "text-dark bg-light" : "text-light bg-dark"}>
+
+          <div dir={checkRedux==="EN"? "ltr":"rtl"}>
+
+      <NavBar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/detailes/:id" element={<ProdDetalies />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="*" element={<NotfoundPage />} />
+        </Routes>
+      </Suspense>
+      </div>
+      </div>
+
+    </BrowserRouter>
+  );
+}
+
+
+
+//nav NavBar
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { Link } from'react-router-dom'; // Import Link from react-router-dom
+import { changeLanguage } from '../../store/actions/lang_action';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme } from '../../store/actions/theme_action';
+
+
+function ColorSchemesExample() {
+
+  const MyLang=useSelector((state)=>state.myLang.lang)
+  const  Theme = useSelector((state) => state.myTheme.theme);
+
+  const dispatch = useDispatch();
+ const  handleLangChange =() =>{
+   dispatch(changeLanguage(MyLang==="EN"?"AR":"EN"));
+ }
+ const handleThemeChange = () => {
+  console.log("clicked");
+  dispatch(changeTheme(Theme === "light" ? "dark" : "light")); // Ensure consistent case
+};
+
+  return (
+    <>
+      <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/register">Register</Nav.Link>
+            <Nav.Link as={Link} to="/login">log in</Nav.Link>
+            <Nav.Link  as={Link} to="/cart">cart</Nav.Link>
+            <Nav.Link onClick={handleLangChange}>{MyLang}</Nav.Link>
+            <Nav.Link  onClick={handleThemeChange}>{Theme}</Nav.Link>
+
+
+          </Nav>
+        </Container>
+      </Navbar>
+      
+    </>
+  );
+}
+
+export default ColorSchemesExample;
+
+
+
+//lan reducer
+
+
+const INITIAL_VALUE={
+    lang:"EN"
+    }
+    
+    export default function Reducer (state=INITIAL_VALUE,action){
+        switch(action.type){
+            case "CHANGE_LANG":
+                console.log("CHANGE_LANG", lang)
+                return {
+                    ...state,
+                    lang:action.payload
+                }
+    
+    
+        }
+    }  
+//lan action
+
+export const changeLanguage =(payload) => {
+
+    return {
+        type:"CHANGE_LANG",
+        payload
+    }
+}
+
+
+
