@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MyCard from '../../components/card/cards';
+import MyCard from '../../components/card/singlecard';
 
 function ACompany() {
   const params = useParams();
@@ -28,8 +28,15 @@ console.log("NAME", Detailes?.belongs_to_collection?.name)
         logo={`https://image.tmdb.org/t/p/w500${Detailes.poster_path}`} // Use 'poster_path' for movie posters
 
         about={Detailes?.overview}
-        location={"mmmmmmm"}
-        size={Detailes.size}
+        
+        size={Detailes?.size}
+        vote_average={Detailes?.vote_average}
+        vote_count={Detailes?.vote_count}
+        genres={Detailes?.genres}
+        duration={Detailes?.runtime}
+        languages={Detailes?.spoken_languages?.english_name}
+        production_company_logo={`https://image.tmdb.org/t/p/w500${Detailes?.production_companies?.[0]?.logo_path}
+`}
         width={"30rem"}
       />
     </>
