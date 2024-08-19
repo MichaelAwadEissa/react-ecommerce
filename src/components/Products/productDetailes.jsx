@@ -6,28 +6,31 @@ import MyCard from '../../components/card/cards';
 function ACompany() {
   const params = useParams();
   const [Detailes, setDetailes] = useState({});
-
+  console.log('ACompany',params)
   useEffect(() => {
     axios
-      .get(`https://retoolapi.dev/GEatlr/data/${params.id}`)
+      .get(`https://api.themoviedb.org/3/movie/${params.id}?api_key=aceb067a920ac17155823a50c94ed9d5`)
       .then((res) => {
+        console.log(res.data);
         setDetailes(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [params.id]);
-
+console.log("NAME", Detailes?.belongs_to_collection?.name)
   return (
     <>
-      <h1>Company Detailes</h1>
+      
       <MyCard
-        name={Detailes.name}
-        logo={Detailes.logo}
-        about={Detailes.about}
-        location={Detailes.location}
+        name={Detailes?.belongs_to_collection?.name}
+        // logo={Detailes.logo}
+        logo={`https://image.tmdb.org/t/p/w500${Detailes.poster_path}`} // Use 'poster_path' for movie posters
+
+        about={Detailes?.overview}
+        location={"mmmmmmm"}
         size={Detailes.size}
-        width={"60rem"}
+        width={"30rem"}
       />
     </>
   );

@@ -65,8 +65,8 @@ export default function AppRoute() {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<Homepage />} />
-              <Route path="/details" element={<Details />} />
-              <Route path="/detailes/:id" element={<ProdDetalies />} />
+              {/* <Route path="/details" element={<Details />} /> */}
+              <Route path="/details/:id" element={<ProdDetalies />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
