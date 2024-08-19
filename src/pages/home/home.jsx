@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from '../../components/navbar/navbar';
 import MyCard from '../../components/card/cards';
-
+import './home.css'
+import { Link,NavLink } from 'react-router-dom';
+import Details from '../../components/details/details';
 const Home = () => {
   const [Products, setProducts] = useState([]);
 
@@ -25,11 +27,23 @@ const Home = () => {
 
   return (
     <>
-      <NavBar />
-      <h1>Home</h1>
-      <div className='d-flex justify-content-center flex-wrap gap-4'>
+      {/*strat search div */}
+      <div className='p-3'>
+        <div className="search p-5">
+          <h1 className='py-3'>Welcome to our movie app</h1>
+          <p>Millions of movies, TV shows and people to discover. Explore now.</p>
+          <div className="form d-flex gap-3">
+            <input type="text" placeholder='Search and explore....' className='form-control'/>
+            <button>Search</button>
+          </div>
+        </div>
+      </div>
+      {/*end search div */}  
+
+      <div className='d-flex justify-content-center flex-wrap gap-4 py-5' >
         {Products.map((Product, index) => (
           <div key={index}>
+            <NavLink className="text-decoration-none text-black" to='/details'>
             <MyCard
               name={Product.title} // TMDB uses 'title' for movie names
               logo={`https://image.tmdb.org/t/p/w500${Product.poster_path}`} // Use 'poster_path' for movie posters
@@ -38,6 +52,7 @@ const Home = () => {
               width="18rem"
               onAddToCart={() => handleAddToCart(Product)}
             />
+            </NavLink>
           </div>
         ))}
       </div>

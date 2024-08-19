@@ -50,6 +50,8 @@ import Homepage from '../pages/home/home';
 import LogIn from '../pages/log in/logIn';
 import Cart from '../components/ShoppingCart/shopping Cart';
 import { useSelector } from 'react-redux';
+import Watchlist from '../components/watchlist/watchlist';
+import Details from '../components/details/details';
 
 export default function AppRoute() {
   const checkRedux = useSelector((state) => state.myLang.lang);
@@ -63,10 +65,12 @@ export default function AppRoute() {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<Homepage />} />
+              <Route path="/details" element={<Details />} />
               <Route path="/detailes/:id" element={<ProdDetalies />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/watchlist" element={<Watchlist />} />
               <Route path="*" element={<NotfoundPage />} />
             </Routes>
           </Suspense>

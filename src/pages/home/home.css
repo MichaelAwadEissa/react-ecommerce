@@ -1,0 +1,11 @@
+button{
+    width: 120px;
+    height: 46px;
+    border-radius: 10px;
+    opacity: 0px;
+    background: #FFE353;
+}
+.search{
+    background: #F3F1F1;
+
+}
