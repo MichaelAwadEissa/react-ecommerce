@@ -40,19 +40,23 @@ const Home = () => {
       </div>
       {/*end search div */}  
 
-      <div className='d-flex justify-content-center flex-wrap gap-4 py-5' >
+      <div className='container-fluid py-5' >
+        <div className="row gy-4">
         {Products.map((Product, index) => (
-          <div key={index}>
-            <MyCard
-              name={Product.title} // TMDB uses 'title' for movie names
-              logo={`https://image.tmdb.org/t/p/w500${Product.poster_path}`} // Use 'poster_path' for movie posters
-              url={`/details/${Product.id}`} // Corrected the path name from 'detailes' to 'details'
-              btnName="View Details"
-              width="18rem"
-              onAddToCart={() => handleAddToCart(Product)}
-            />
-          </div>
+          
+            <div key={index} className='col-2'>
+              <MyCard
+                name={Product.title} // TMDB uses 'title' for movie names
+                logo={`https://image.tmdb.org/t/p/w500${Product.poster_path}`} // Use 'poster_path' for movie posters
+                url={`/details/${Product.id}`} // Corrected the path name from 'detailes' to 'details'
+                btnName="View Details"
+                width="18rem"
+                date={Product.release_date}
+                onAddToCart={() => handleAddToCart(Product)}
+              />
+            </div>
         ))}
+        </div>
       </div>
     </>
   );

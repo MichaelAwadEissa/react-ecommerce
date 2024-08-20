@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function BasicExample(props) {
 
@@ -12,21 +12,18 @@ function BasicExample(props) {
   };
 
   return (
-    <Card style={{ width: props.width }}>
+    <Card >
       <Card.Img variant="top" src={props.logo}/>
       <Card.Body>
-        <Card.Title>{props.name}</Card.Title>
-        {props.about && <Card.Text>
-          {props.about}
-        </Card.Text>}
-        <Card.Text>
+        <Card.Title title={props.name}>{props.name.slice(0,10)}..</Card.Title>
+        {props.about && <Card.Text>{props.about}</Card.Text>}
+        <Card.Text>{props.date}</Card.Text>
+        {/* <Card.Text>
           {props.location}
-        </Card.Text>
-        {props.size && <Card.Text>
-          number of employee:{props.size}
-        </Card.Text>}
-        {props.btnName && <Button as={Link} to={props.url} variant="primary">{props.btnName}</Button>}
-        <Button onClick={handleAddToCart} variant="primary">Add to Cart</Button>
+        </Card.Text> */}
+        {/* {props.size && <Card.Text>number of employee:{props.size}</Card.Text>} */}
+        {props.btnName && <button className='w-100 rounded-5 btn btn-outline-success' as={Link} to={props.url} >{props.btnName}</button>}
+        <button className='my-2 w-100 rounded-5 btn btn-outline-success' onClick={handleAddToCart}> WatchList </button>
       </Card.Body>
     </Card>
   );
