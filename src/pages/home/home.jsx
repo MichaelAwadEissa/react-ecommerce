@@ -15,7 +15,6 @@ const Home = () => {
         setProducts(res.data.results); // Access the 'results' array from the response
       })
       .catch((err) => {
-        console.log(err);
       });
   }, []);
 
@@ -24,7 +23,13 @@ const Home = () => {
   const handleAddToCart = (product) => {
     setCart(prevCart => [...prevCart, product]);
   };
-
+  function search(){
+    let valueSearch = document.getElementById("search").value
+    setProducts(Products.filter((movie)=>{
+      return valueSearch == movie.title || movie.overview.includes(valueSearch)
+    }))
+    console.log(Products)
+  }
   return (
     <>
       {/*strat search div */}
@@ -33,8 +38,8 @@ const Home = () => {
           <h1 className='py-3'>Welcome to our movie app</h1>
           <p>Millions of movies, TV shows and people to discover. Explore now.</p>
           <div className="form d-flex gap-3">
-            <input type="text" placeholder='Search and explore....' className='form-control'/>
-            <button>Search</button>
+            <input id='search' type="text" placeholder='Search and explore....' className='form-control'/>
+            <button onClick={()=>{search()}} className='btn btn-warning'>Search</button>
           </div>
         </div>
       </div>
