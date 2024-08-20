@@ -43,7 +43,6 @@ const Home = () => {
       <div className='d-flex justify-content-center flex-wrap gap-4 py-5' >
         {Products.map((Product, index) => (
           <div key={index}>
-            <NavLink className="text-decoration-none text-black" to='/details'>
             <MyCard
               name={Product.title} // TMDB uses 'title' for movie names
               logo={`https://image.tmdb.org/t/p/w500${Product.poster_path}`} // Use 'poster_path' for movie posters
@@ -52,7 +51,6 @@ const Home = () => {
               width="18rem"
               onAddToCart={() => handleAddToCart(Product)}
             />
-            </NavLink>
           </div>
         ))}
       </div>
